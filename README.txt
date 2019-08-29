@@ -49,9 +49,11 @@
             
 +Seguimiento del desarrollo:
 
-    -Tal como se explica en la sección de estructura,esta prueba se compone de 2 proyectos,una API y un proyecto Rest.
+    -Tal como se explica en la sección de estructura,esta prueba se compone de 2 proyectos,una API y un proyecto
+    de WebService Rest.
+    
     Para llevarlo a cabo,en primer lugar hemos creado el proyecto api,en el cual hemos implementado en la capa de servicio,los 
-    metodos que queremos utilizar en los WS (Se puede observar que intencionadamente,no los hemos publicado todos en la 
+    metodos que queremos utilizar en el WS (Se puede observar que intencionadamente,no los hemos publicado todos en la 
     interfaz),solamente los que nos interesan.Tambien hemos añadido al POM las dependencias necesarias.
     
     -Hemos creado una clase de Test (JUnit) para verificar el correcto funcionamiento de dichos metodos,alcanzando una cobertura  
@@ -62,12 +64,21 @@
     altura o en subpaquetes inferiores serán automaticamente instanciados por Spring (Al arrancar) sin volver a tocar la 
     configuracion.
     
-    Una vez que hemos tenido completada la parte de la API,empezamos con el proyecto de WebServices.
-    Hemos creado un proyecto con un controlador tipo Rest que contiene las dos operaciones que hemos descrito anteriormente
-
+    -Por último,en el aplication.properties,hemos definido las propiedades de arranque del proyecto (En este caso el puerto 8087 
+    y el contexto que es /calculadora).
     
-Espero la respuesta por correo para seguir avanzando.
-
-Gracias.
-
-Un saludo.
+    -Una vez que hemos tenido completada la parte de la API,empezamos con el proyecto de WebServices.
+    Hemos creado un proyecto con un controlador tipo Rest que contiene las dos operaciones que hemos descrito anteriormente 
+    (Sumador y Restador) y hemos añadido al pom tanto las dependencias necesarias como las librerias de nuestra API y la de   
+    Tracer (La cual hemos instalado previamente por consola para almacenar la dependencia en nuestro reposotorio de maven).
+    
+    -Para poder hacer las peticiones REST,es imprescindible crear un objeto request (Que contendrá el mensaje de entrada) y un 
+    objeto Response (Que contendrá la respuesta),los cuales los crearemos en la carpeta model.
+    
+    -Puesto que se trata de operaciones muy sencillas y sin conexiones a BBDD de ningun tipo,no vemos necesario el uso de DTOs 
+    como tal y podemos crear ambas peticiones con clases Java básicas (En este caso se utiliza el tipo Double).
+    
+    -Por último se crea la clase de arranque (Y se añade al POM) ProyectoRestServiceApplication y una clase de configuracion 
+    similar a la de la API,añadiendo ambas al @ComponentScan.
+    
+Para finalizar,se arranca el proyecto REST como una Java Application en el servidor embebido de Spring.
