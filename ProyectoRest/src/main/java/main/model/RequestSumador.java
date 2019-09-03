@@ -12,24 +12,24 @@ import javax.xml.bind.annotation.XmlType;
 public class RequestSumador {
 
 	/** The elemento 1. */
-	private double elemento1;
+	private Double elemento1;
 
 	/** The elemento 2. */
-	private double elemento2;
+	private Double elemento2;
 
-	public double getElemento1() {
+	public Double getElemento1() {
 		return elemento1;
 	}
 
-	public void setElemento1(double elemento1) {
+	public void setElemento1(Double elemento1) {
 		this.elemento1 = elemento1;
 	}
 
-	public double getElemento2() {
+	public Double getElemento2() {
 		return elemento2;
 	}
 
-	public void setElemento2(double elemento2) {
+	public void setElemento2(Double elemento2) {
 		this.elemento2 = elemento2;
 	}
 }
