@@ -1,28 +1,20 @@
 package api.service;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import api.ApiConfig;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApiConfig.class)
-public class OperacionesImplTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-
-	@InjectMocks
-	protected OperacionesServiceImpl operacionesServiceImpl;
+@SpringBootTest(classes = ApiConfig.class)
+@ExtendWith(SpringExtension.class)
+class OperacionesImplTest {
 
 	// Variables
 	protected static final Double ZERO = 0.0;
@@ -33,11 +25,11 @@ public class OperacionesImplTest {
 	protected static Double RESULTADO_DIVISION = 0.0;
 	protected static Double RESULTADO_MULTPLICACION = 0.0;
 
-	@Before
-	public void init() {
-		// Aqui se rellenan las variables necesarias para realizar los test
-		// y se crean los mocks en caso de ser necesario (No es el caso)
+	@InjectMocks
+	private OperacionesServiceImpl operacionesServiceImpl;
 
+	@BeforeEach
+	public void onInit() {
 		RESULTADO_SUMA = ELEMENTO1 + ELEMENTO2;
 		RESULTADO_RESTA = ELEMENTO1 - ELEMENTO2;
 		RESULTADO_DIVISION = ELEMENTO1 / ELEMENTO2;
@@ -66,8 +58,9 @@ public class OperacionesImplTest {
 
 	@Test
 	public void test_divisor_por_cero_exception() {
-		thrown.expect(IllegalArgumentException.class);
-		operacionesServiceImpl.divisor(ELEMENTO1, ZERO);
-		Assertions.assertThat(IllegalArgumentException.class);
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			operacionesServiceImpl.divisor(ELEMENTO1, ZERO);
+		});
 	}
+
 }
